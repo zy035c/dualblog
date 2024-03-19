@@ -1,9 +1,10 @@
 # Dual Blog: a Blog contributed by 2 developers
 
-#### Author: Ziyi Chen
 
 ### 
-## Command 运行命令
+## Command 运行命令 初次本地部署
+#### Author: Ziyi Chen
+
 根据pom.xml重新下载安装并build maven依赖
 ```shell
 mvn clean install
