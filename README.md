@@ -3,7 +3,6 @@
 
 ### 
 ## Command 运行命令 初次本地部署
-#### Author: Ziyi Chen
 
 根据pom.xml重新下载安装并build maven依赖
 ```shell
