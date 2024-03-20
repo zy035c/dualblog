@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# 配置细节 不commit数据库连接参数
+application.yml
