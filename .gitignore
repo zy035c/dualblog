@@ -34,3 +34,4 @@ build/
 
 # 配置细节 不commit数据库连接参数
 src/main/resources/application.yml
+
