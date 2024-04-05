@@ -2,6 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ex.dualblog.mapper.BlogMapper">
     <select id="getAllBlogs" resultType="com.ex.dualblog.model.Blog">
-        SELECT * FROM test;
+        SELECT * FROM Blog;
     </select>
 </mapper>
