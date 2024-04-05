@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.ex.dualblog.model.Blog;
 import com.ex.dualblog.service.BlogService;
+
 
 
 @RestController
@@ -21,7 +23,6 @@ public class BlogPostsController {
     
     @Autowired
     private BlogService blogService;
-
     @GetMapping
     public List<Blog> getAllBlogs() {
         return blogService.getAllBlogs();
