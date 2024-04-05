@@ -3,8 +3,8 @@ CREATE TABLE Blog (
     title VARCHAR(255) NOT NULL,         
     content TEXT     
 );
-INSERT INTO test VALUES (0,'aaaaa','aaaaaaaaaa'),(1,'bbbbb','bbbbbbbbbb'),(2,'ccccc','cccccccccc');
-SELECT * FROM test;
+INSERT INTO Blog VALUES (0,'aaaaa','aaaaaaaaaa'),(1,'bbbbb','bbbbbbbbbb'),(2,'ccccc','cccccccccc');
+SELECT * FROM Blog;
 
 CREATE TABLE users (
     id VARCHAR(36) PRIMARY KEY,

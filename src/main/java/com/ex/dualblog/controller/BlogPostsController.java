@@ -18,7 +18,6 @@ import com.ex.dualblog.service.BlogService;
 
 @RestController
 @RequestMapping("/blog/posts")
-@CrossOrigin(origins = "http://localhost:3000")
 public class BlogPostsController {
     
     @Autowired
