@@ -15,7 +15,7 @@ public class User implements Serializable {
 
     // 带参数构造函数
     public User(Long id, String username, String email, String password) {
-        this.id = id;
+        this.id = Long.toString(id);
         this.username = username;
         this.email = email;
         this.password = password;
