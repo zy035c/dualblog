@@ -10,4 +10,6 @@ import com.ex.dualblog.model.User;
 public interface UserMapper {
     List<User> getAllUsers();
     void addUser(User user);
+    User findUserByEmailAndPassword(User user);
+    User findUserByID(String id);
 }
