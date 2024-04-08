@@ -3,7 +3,6 @@ package com.ex.dualblog.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +32,7 @@ public class UserController {
         return Result.success(UserService.getAllUsers());
     }
      
+    
     @PostMapping(value = "/create",consumes = "application/json", produces = "application/json")
     public Result<Void> addUser(@RequestBody User user) {
         System.out.println("UserController.addUser() called");
@@ -77,5 +77,10 @@ public class UserController {
         }
         return null;
     }
-    
+
+    @GetMapping(value = "/verify")
+    public Result<Void> isVerify(){
+        System.out.println("Verification Success");
+        return Result.success();
+    }
 }

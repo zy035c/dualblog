@@ -1,7 +1,8 @@
 package com.ex.dualblog.utils;
 
+import java.io.Serializable;
 
-public class Result<T> {
+public class Result<T> implements Serializable{
     private String code;
     private String msg;
     private T data;
@@ -37,8 +38,8 @@ public class Result<T> {
         this.data = data;
     }
  
-    public static Result success() {
-        Result result = new Result<>();
+    public static Result<Void> success() {
+        Result<Void> result = new Result<>();
         result.setCode("200");
         result.setMsg("成功");
         return result;
@@ -57,4 +58,11 @@ public class Result<T> {
         result.setMsg(msg);
         return result;
     }
+
+    // public static <T>Result<T> error(String code, String msg, T data) {
+    //     Result<T> result = new Result<>(data);
+    //     result.setCode(code);
+    //     result.setMsg(msg);
+    //     return result;
+    // }
 }

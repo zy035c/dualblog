@@ -1,15 +1,10 @@
 package com.ex.dualblog.service;
-
-import java.security.MessageDigest;
 import java.util.List;
-
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ex.dualblog.mapper.UserMapper;
 import com.ex.dualblog.model.User;
-import com.mysql.cj.protocol.Message;
 import com.ex.dualblog.utils.*;
 
 import java.util.UUID;
