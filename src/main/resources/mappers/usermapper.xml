@@ -3,11 +3,11 @@
 <mapper namespace="com.ex.dualblog.mapper.UserMapper">
 
     <select id="getAllUsers" resultType="com.ex.dualblog.model.User">
-        SELECT * FROM user;
+        SELECT * FROM User;
     </select>
 
     <insert id="addUser" parameterType="com.ex.dualblog.model.User">
-        INSERT INTO user (id, username, phone, email, password)
+        INSERT INTO User (id, username, phone, email, password)
         VALUES (#{id}, #{username},#{phone},#{email},#{password})
     </insert>
 
@@ -16,14 +16,14 @@
     </select> -->
 
     <select id="findUserByEmailAndPassword" parameterType="com.ex.dualblog.model.User" resultType="com.ex.dualblog.model.User">
-        SELECT * FROM user WHERE email = #{email} AND password = #{password}
+        SELECT * FROM User WHERE email = #{email} AND password = #{password}
     </select>
 
     <select id="findUserByID" resultType="com.ex.dualblog.model.User">
-        SELECT * FROM user WHERE id = #{id}
+        SELECT * FROM User WHERE id = #{id}
     </select>
 
     <delete id="deleteUserByID">
-        DELETE FROM user WHERE id = #{id}
+        DELETE FROM User WHERE id = #{id}
     </delete>
 </mapper>

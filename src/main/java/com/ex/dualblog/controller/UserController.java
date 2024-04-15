@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ex.dualblog.model.User;
 import com.ex.dualblog.schema.LoginSchema;
+import com.ex.dualblog.schema.Result;
 import com.ex.dualblog.service.UserService;
 import com.ex.dualblog.utils.*;
 

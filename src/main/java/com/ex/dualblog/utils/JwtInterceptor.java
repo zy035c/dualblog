@@ -21,6 +21,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import com.ex.dualblog.service.UserService;
 import com.ex.dualblog.model.User;
+import com.ex.dualblog.schema.Result;
 
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
@@ -88,7 +89,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         // 设置返回401 和响应编码
         response.setStatus(401);
         response.setContentType("Application/json;charset=utf-8");
-        Result err = Result.error("5003","未登陆，请先登陆");
+        var err = Result.error("5003","未登陆，请先登陆");
         // 构造返回响应体
         // Result<String> result = Result.<String>builder()
         //         .code(HttpStatus.UNAUTHORIZED.value())

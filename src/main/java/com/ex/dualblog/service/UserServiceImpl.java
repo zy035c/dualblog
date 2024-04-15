@@ -1,4 +1,5 @@
 package com.ex.dualblog.service;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,67 +37,67 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String userLogin(User user){
-            // 1. 进行一些非空判断
-            if (user.getEmail() == null || "".equals(user.getEmail())) {
-                throw new CustomException("邮箱不能为空");
-            }
-    
-            if (user.getPassword() == null || "".equals(user.getPassword())) {
-                throw new CustomException("密码不能为空");
-            }
-            // 2. 从数据库里面根据这个用户名和密码去查询对应的管理员信息，
-            User u = UserMapper.findUserByEmailAndPassword(user);
-            if (u == null) {
-                // 如果查出来没有，那说明输入的用户名或者密码有误，提示用户，不允许登录
-                throw new CustomException("用户名或密码输入错误");
-            }
-            // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
-            
-            String token = JwtTokenUtils.genToken(u.getId().toString(), user.getPassword());
+    public String userLogin(User user) {
+        // 1. 进行一些非空判断
+        if (user.getEmail() == null || "".equals(user.getEmail())) {
+            throw new CustomException("邮箱不能为空");
+        }
 
-            redisTemplate.opsForValue().set(u.getId(), token,2,TimeUnit.HOURS); //把token加入白名单
-            System.out.println(token);
-            // u.setToken(token);
-            // System.out.println((String) redisTemplate.opsForValue().get(u.getId()));
-            return token;
+        if (user.getPassword() == null || "".equals(user.getPassword())) {
+            throw new CustomException("密码不能为空");
+        }
+        // 2. 从数据库里面根据这个用户名和密码去查询对应的管理员信息，
+        User u = UserMapper.findUserByEmailAndPassword(user);
+        if (u == null) {
+            // 如果查出来没有，那说明输入的用户名或者密码有误，提示用户，不允许登录
+            throw new CustomException("用户名或密码输入错误");
+        }
+        // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
+
+        String token = JwtTokenUtils.genToken(u.getId().toString(), user.getPassword());
+
+        redisTemplate.opsForValue().set(u.getId(), token, 2, TimeUnit.HOURS); // 把token加入白名单
+        System.out.println("[userLogin] Token: " + token);
+        // u.setToken(token);
+        // System.out.println((String) redisTemplate.opsForValue().get(u.getId()));
+        return token;
     }
 
     @Override
-    public User findUserByEmailAndPassword(User user){
+    public User findUserByEmailAndPassword(User user) {
         return UserMapper.findUserByEmailAndPassword(user);
     }
 
-
     @Override
-    public User findUserByID(String id){
+    public User findUserByID(String id) {
         User result = UserMapper.findUserByID(id);
-        if(result == null){
+        if (result == null) {
             throw new CustomException("查找的用户不存在");
         }
         return result;
     }
 
     @Override
-    public boolean userLogout(String token){
-        try{
+    public boolean userLogout(String token) {
+        try {
             String uuid = JWT.decode(token).getAudience().get(0);
             return redisTemplate.delete(uuid);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new CustomException("登出错误");
         }
     }
+
     @Override
-    public boolean findTokenbyUUID(String uuid){
+    public boolean findTokenbyUUID(String uuid) {
         String value = (String) redisTemplate.opsForValue().get(uuid);
-        if(value == null)
+        if (value == null)
             return false;
         else
             return true;
     }
 
     @Override
-    public void userDelete(String token){
+    public void userDelete(String token) {
         String id = JWT.decode(token).getAudience().get(0);
         UserMapper.deleteUserByID(id);
     }

@@ -5,14 +5,15 @@ import java.io.Serializable;
 public class LoginSchema implements Serializable {
     public String token;
 
-    public LoginSchema(String t){
+    public LoginSchema(String t) {
         token = t;
     }
-    public String getToken(){
+
+    public String getToken() {
         return token;
     }
-    public void setToken(String newToken){
+
+    public void setToken(String newToken) {
         token = newToken;
     }
 }
-
