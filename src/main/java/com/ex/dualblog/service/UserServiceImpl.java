@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("密码不能为空");
         }
         // 2. 从数据库里面根据这个用户名和密码去查询对应的管理员信息，
+        user.setPassword(MD5.code(user.getPassword()));
         User u = UserMapper.findUserByEmailAndPassword(user);
         if (u == null) {
             // 如果查出来没有，那说明输入的用户名或者密码有误，提示用户，不允许登录
