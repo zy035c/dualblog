@@ -1,7 +1,8 @@
 package com.ex.dualblog.schema;
 
+import java.io.Serializable;
 
-public class LoginSchema {
+public class LoginSchema implements Serializable {
     public String token;
 
     public LoginSchema(String t){

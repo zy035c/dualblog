@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ex.dualblog.model.User;
 import com.ex.dualblog.schema.LoginSchema;
 import com.ex.dualblog.service.UserService;
-import com.ex.dualblog.utils.CustomException;
 import com.ex.dualblog.utils.*;
 
 
@@ -81,6 +81,26 @@ public class UserController {
     @GetMapping(value = "/verify")
     public Result<Void> isVerify(){
         System.out.println("Verification Success");
+        return Result.success();
+    }
+
+    @GetMapping(value = "/logout")
+    public Result<Void> userLogout(@RequestHeader("token") String token){
+        try{
+            if(UserService.userLogout(token)){
+                System.out.println("删除成功");
+            }else{
+                System.out.println("删除失败");
+            }
+            return Result.success();
+        } catch(CustomException e){
+            return Result.error("5004", "登出失败");
+        }
+    }
+
+    @GetMapping(value = "/delete")
+    public Result<Void> userDelete(@RequestHeader("token") String token){
+        UserService.userDelete(token);
         return Result.success();
     }
 }

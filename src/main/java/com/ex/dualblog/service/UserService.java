@@ -10,4 +10,7 @@ public interface UserService {
     User findUserByEmailAndPassword(User user);
     User findUserByID(String ID);
     String userLogin(User user);
+    boolean userLogout(String token);
+    boolean findTokenbyUUID(String uuid);
+    void userDelete(String uuid);
 }

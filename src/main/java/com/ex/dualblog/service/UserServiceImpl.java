@@ -1,18 +1,24 @@
 package com.ex.dualblog.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.JWT;
 import com.ex.dualblog.mapper.UserMapper;
 import com.ex.dualblog.model.User;
 import com.ex.dualblog.utils.*;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper UserMapper;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public List<User> getAllUsers() {
         return UserMapper.getAllUsers();
@@ -48,7 +54,11 @@ public class UserServiceImpl implements UserService {
             // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
             
             String token = JwtTokenUtils.genToken(u.getId().toString(), user.getPassword());
+
+            redisTemplate.opsForValue().set(u.getId(), token,2,TimeUnit.HOURS); //把token加入白名单
+            System.out.println(token);
             // u.setToken(token);
+            // System.out.println((String) redisTemplate.opsForValue().get(u.getId()));
             return token;
     }
 
@@ -65,5 +75,29 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("查找的用户不存在");
         }
         return result;
+    }
+
+    @Override
+    public boolean userLogout(String token){
+        try{
+            String uuid = JWT.decode(token).getAudience().get(0);
+            return redisTemplate.delete(uuid);
+        }catch(Exception e){
+            throw new CustomException("登出错误");
+        }
+    }
+    @Override
+    public boolean findTokenbyUUID(String uuid){
+        String value = (String) redisTemplate.opsForValue().get(uuid);
+        if(value == null)
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public void userDelete(String token){
+        String id = JWT.decode(token).getAudience().get(0);
+        UserMapper.deleteUserByID(id);
     }
 }

@@ -22,4 +22,8 @@
     <select id="findUserByID" resultType="com.ex.dualblog.model.User">
         SELECT * FROM user WHERE id = #{id}
     </select>
+
+    <delete id="deleteUserByID">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
 </mapper>

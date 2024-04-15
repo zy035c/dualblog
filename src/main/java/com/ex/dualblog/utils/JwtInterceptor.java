@@ -3,6 +3,7 @@ package com.ex.dualblog.utils;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -28,7 +29,9 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Resource
     private UserService userService;
-
+    
+    // private RedisTemplate<String, Object> redisTemplate;
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception {
         // 1. 从http请求的header中获取token
@@ -71,6 +74,11 @@ public class JwtInterceptor implements HandlerInterceptor {
             // throw new CustomException("token验证失败，请重新登录");
             returnNoLogin(response);
             return false;
+        }
+
+        if(!userService.findTokenbyUUID(userId)){ // token不在白名单中
+            returnNoLogin(response);
+            return false; 
         }
         return true;
     }

@@ -12,4 +12,5 @@ public interface UserMapper {
     void addUser(User user);
     User findUserByEmailAndPassword(User user);
     User findUserByID(String id);
+    void deleteUserByID(String id);
 }
