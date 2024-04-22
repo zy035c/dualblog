@@ -26,14 +26,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
+
+
+        // 检查邮箱是否已被使用
+        User u = UserMapper.findUserByEmail(user.getEmail());
+        if (u != null) {
+            return false;
+        }
+
         UUID uuid = UUID.randomUUID();
         user.setId(uuid.toString());
         System.out.println(user);
         user.setPassword(MD5.code(user.getPassword())); // MD5加密密码
         UserMapper.addUser(user);
-
-        // throw new CustomException("该邮箱已被使用");
+        return true;
     }
 
     @Override
