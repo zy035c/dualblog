@@ -104,4 +104,13 @@ public class UserController {
         UserService.userDelete(token);
         return Result.success();
     }
+
+    // @PostMapping(value = "/test")
+    // public Result<Void> ESAddUser(@RequestBody User user){
+    //     if (UserService.ESAddUser(user)) {
+    //         return Result.success();
+    //     } else{
+    //         return Result.error("1", "test");
+    //     }
+    // }
 }

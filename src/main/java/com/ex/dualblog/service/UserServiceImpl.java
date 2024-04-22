@@ -13,17 +13,31 @@ import com.ex.dualblog.utils.*;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+// import com.ex.dualblog.repository.ESUserRepository;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper UserMapper;
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+    // @Autowired
+    // private ESUserRepository userRepository;
 
     @Override
     public List<User> getAllUsers() {
         return UserMapper.getAllUsers();
     }
+
+    // @Override
+    // public boolean ESAddUser(User user){
+    //     try {
+    //         userRepository.save(user);
+    //         return true;
+    //     } catch (Exception e) {
+    //         return false;
+    //     }
+    // }
 
     @Override
     public void addUser(User user) {

@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import org.springframework.core.io.ClassPathResource;
 // import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 // import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 @MapperScan("com.ex.dualblog.mapper")
 public class DualblogApplication {
 

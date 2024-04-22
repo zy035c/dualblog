@@ -13,4 +13,6 @@ public interface UserService {
     boolean userLogout(String token);
     boolean findTokenbyUUID(String uuid);
     void userDelete(String uuid);
+
+    // boolean ESAddUser(User user);
 }

@@ -8,8 +8,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-
-public class User implements Serializable{
+@Document(indexName = "car",createIndex = true)
+public class Car{
+    @Id
     private String id;
     private String username;
     private String email;
@@ -17,10 +18,10 @@ public class User implements Serializable{
     private String phone;
 
     // 无参构造函数
-    public User() {}
+    public Car() {}
 
     // 带参数构造函数
-    public User(Long id, String username, String email, String password) {
+    public Car(Long id, String username, String email, String password) {
         this.id = Long.toString(id);
         this.username = username;
         this.email = email;
@@ -28,7 +29,7 @@ public class User implements Serializable{
     }
 
      // 带参数构造函数
-     public User(String username, String email, String password) {
+     public Car(String username, String email, String password) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.email = email;
