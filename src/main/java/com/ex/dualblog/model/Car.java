@@ -8,8 +8,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "car",createIndex = true)
-public class Car{
+@Document(indexName = "car", createIndex = true)
+public class Car {
     @Id
     private String id;
     private String username;
@@ -18,7 +18,8 @@ public class Car{
     private String phone;
 
     // 无参构造函数
-    public Car() {}
+    public Car() {
+    }
 
     // 带参数构造函数
     public Car(Long id, String username, String email, String password) {
@@ -28,14 +29,13 @@ public class Car{
         this.password = password;
     }
 
-     // 带参数构造函数
-     public Car(String username, String email, String password) {
+    // 带参数构造函数
+    public Car(String username, String email, String password) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
 
     // Getters 和 Setters 方法
     public String getId() {
@@ -78,7 +78,6 @@ public class Car{
         this.phone = phone;
     }
 
-
     // 可选的 toString 方法
     @Override
     public String toString() {
@@ -90,4 +89,3 @@ public class Car{
                 '}';
     }
 }
-
