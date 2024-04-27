@@ -11,30 +11,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.ex.dualblog.model.Blog;
+import com.ex.dualblog.schema.BlogJsonSchema;
 import com.ex.dualblog.service.BlogService;
 
 
 
 @RestController
-@RequestMapping("/blog/posts")
-public class BlogPostsController {
+@RequestMapping("/user")
+public class BlogController {
     
     @Autowired
     private BlogService blogService;
+    
     @GetMapping
     public List<Blog> getAllBlogs() {
         return blogService.getAllBlogs();
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public String insertBlog(@RequestBody Blog blog) {
+    public String insertBlog(@RequestBody BlogJsonSchema blog) {
         System.out.println("BlogPostController.insertBlog() called");
-        System.out.println("BlogPostController.insertBlog() blog = " + blog);
-
-        // print blog's field
-        System.out.println("BlogPostController.insertBlog() blog.getId() = " + blog.getId());
-        System.out.println("BlogPostController.insertBlog() blog.getTitle() = " + blog.getTitle());
-        System.out.println("BlogPostController.insertBlog() blog.getBlogContent() = " + blog.getContent());
+        System.out.println("BlogPostController.insertBlog() blog title = " + blog.getTitle());
+        System.out.println("BlogPostController.insertBlog() blog author = " + blog.getAuthor());
 
         blogService.insertBlog(blog);
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.ex.dualblog.model.Car;
 import com.ex.dualblog.model.User;
 import com.ex.dualblog.schema.LoginSchema;
 import com.ex.dualblog.schema.Result;
@@ -105,12 +105,12 @@ public class UserController {
         return Result.success();
     }
 
-    // @PostMapping(value = "/test")
-    // public Result<Void> ESAddUser(@RequestBody User user){
-    //     if (UserService.ESAddUser(user)) {
-    //         return Result.success();
-    //     } else{
-    //         return Result.error("1", "test");
-    //     }
-    // }
+    @PostMapping(value = "/test")
+    public Result<Void> ESAddUser(@RequestBody Car user){
+        if (UserService.ESAddCar(user)) {
+            return Result.success();
+        } else{
+            return Result.error("1", "test");
+        }
+    }
 }

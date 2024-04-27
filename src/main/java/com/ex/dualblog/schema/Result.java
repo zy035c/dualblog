@@ -31,8 +31,7 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public Result() {
-    }
+    public Result() {}
 
     public Result(T data) {
         this.data = data;

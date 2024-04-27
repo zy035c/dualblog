@@ -1,6 +1,7 @@
 package com.ex.dualblog.service;
 import java.util.List;
 
+import com.ex.dualblog.model.Car;
 import com.ex.dualblog.model.User;
 
 
@@ -14,5 +15,5 @@ public interface UserService {
     boolean findTokenbyUUID(String uuid);
     void userDelete(String uuid);
 
-    // boolean ESAddUser(User user);
+    boolean ESAddCar(Car car);
 }

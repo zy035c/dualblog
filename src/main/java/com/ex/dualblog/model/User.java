@@ -8,8 +8,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-
-public class User implements Serializable{
+public class User implements Serializable {
     private String id;
     private String username;
     private String email;
@@ -17,7 +16,8 @@ public class User implements Serializable{
     private String phone;
 
     // 无参构造函数
-    public User() {}
+    public User() {
+    }
 
     // 带参数构造函数
     public User(Long id, String username, String email, String password) {
@@ -27,14 +27,13 @@ public class User implements Serializable{
         this.password = password;
     }
 
-     // 带参数构造函数
-     public User(String username, String email, String password) {
+    // 带参数构造函数
+    public User(String username, String email, String password) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
         this.email = email;
         this.password = password;
     }
-
 
     // Getters 和 Setters 方法
     public String getId() {
@@ -77,7 +76,6 @@ public class User implements Serializable{
         this.phone = phone;
     }
 
-
     // 可选的 toString 方法
     @Override
     public String toString() {
@@ -89,4 +87,3 @@ public class User implements Serializable{
                 '}';
     }
 }
-

@@ -3,19 +3,18 @@ package com.ex.dualblog.model;
 import java.io.Serializable;
 
 public class Blog implements Serializable {
-    private Long id = (long) 0;
+
+    private String id;
     private String title;
-    private String content;
+    private String authorUUID;
 
-    // private String author;
-
-    public Blog(Long id, String title, String content) {
+    public Blog(String id, String title, String author) {
         this.id = id;
         this.title = title;
-        this.content = content;
+        this.authorUUID = author;
     }
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -23,24 +22,16 @@ public class Blog implements Serializable {
         return this.title;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getAuthorUUID() {
+        return this.authorUUID;
     }
 
-    // public String getAuthor() {
-    //     return this.author;
-    // }
-
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Blog() {}
