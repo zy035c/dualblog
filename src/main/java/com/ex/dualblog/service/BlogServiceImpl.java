@@ -28,9 +28,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<BlogJsonSchema> getAllBlogs() {
-        // var l = new ArrayList<Blog>();
-        // l.add(new Blog(Long.valueOf(1), "Greeting!", "Hello, World."));
-        // return l;
 
         var blogs = blogMapper.getAllBlogs();
         var resultList = new ArrayList<BlogJsonSchema>();

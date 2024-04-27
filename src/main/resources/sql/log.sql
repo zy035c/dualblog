@@ -1,9 +1,10 @@
-CREATE TABLE Blog (         
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,         
-    content TEXT     
+CREATE TABLE Blog (
+    id VARCHAR(255) PRIMARY KEY,
+    title VARCHAR(255),
+    authorUUID VARCHAR(255),
+    timestamp TIMESTAMP
 );
-INSERT INTO Blog VALUES (0,'aaaaa','aaaaaaaaaa'),(1,'bbbbb','bbbbbbbbbb'),(2,'ccccc','cccccccccc');
+
 SELECT * FROM Blog;
 
 CREATE TABLE User (
