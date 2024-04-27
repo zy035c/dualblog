@@ -16,13 +16,13 @@ import com.ex.dualblog.schema.Blog.CreateBlogResultSchema;
 import com.ex.dualblog.service.BlogService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/blog")
 public class BlogController {
 
     @Autowired
     private BlogService blogService;
 
-    @GetMapping
+    @GetMapping(value = "/all",consumes = "application/json", produces = "application/json")
     public List<Blog> getAllBlogs() {
         return blogService.getAllBlogs();
     }
