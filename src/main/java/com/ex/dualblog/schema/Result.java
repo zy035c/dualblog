@@ -37,8 +37,8 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public static Result<Void> success() {
-        Result<Void> result = new Result<>();
+    public static <T >Result<T> success() {
+        Result<T> result = new Result<>();
         result.setCode("200");
         result.setMsg("成功");
         return result;

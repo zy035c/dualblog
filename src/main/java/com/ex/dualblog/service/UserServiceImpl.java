@@ -113,4 +113,18 @@ public class UserServiceImpl implements UserService {
         String id = JWT.decode(token).getAudience().get(0);
         UserMapper.deleteUserByID(id);
     }
+
+    @Override
+    public User findUserInfoByToken(String token) {
+        String id = JWT.decode(token).getAudience().get(0);
+        User user = this.findUserByID(id);
+        if (user == null) {
+            throw new CustomException("User id is not found");
+        }
+
+        // omit confidential field of user
+        user.setPassword(null);
+        return user;
+    }
+
 }

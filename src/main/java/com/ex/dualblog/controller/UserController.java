@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     private UserService UserService;
 
-    @GetMapping
+    @GetMapping(value = "/all")
     public Result<List<User>> getAllUsers() {
         return Result.success(UserService.getAllUsers());
     }
@@ -95,5 +95,26 @@ public class UserController {
     public Result<Void> userDelete(@RequestHeader("token") String token) {
         UserService.userDelete(token);
         return Result.success();
+    }
+
+    /**
+     * @return
+     *         Get user's info (not password) by token
+     */
+    @GetMapping(value = "/")
+    public Result<User> userGetInfo(@RequestHeader("token") String token) {
+
+        Result<User> res = Result.success();
+
+        try {
+            var user = UserService.findUserInfoByToken(token);
+            res.setData(user);
+        } catch (CustomException e) {
+            res.setMsg("找不到当前用户\n" + e.toString());
+        } catch (Exception e) {
+            res.setMsg("未知错误\n" + e.toString());
+        }
+
+        return res;
     }
 }

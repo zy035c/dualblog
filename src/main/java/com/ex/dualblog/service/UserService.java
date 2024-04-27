@@ -14,4 +14,5 @@ public interface UserService {
     boolean userLogout(String token);
     boolean findTokenbyUUID(String uuid);
     void userDelete(String uuid);
+    User findUserInfoByToken(String token);
 }
