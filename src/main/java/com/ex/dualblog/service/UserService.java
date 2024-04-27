@@ -2,6 +2,7 @@ package com.ex.dualblog.service;
 import java.util.List;
 
 import com.ex.dualblog.model.User;
+import com.ex.dualblog.schema.LoginResultSchema;
 
 
 public interface UserService {
@@ -9,7 +10,7 @@ public interface UserService {
     boolean addUser(User user);
     User findUserByEmailAndPassword(User user);
     User findUserByID(String ID);
-    String userLogin(User user);
+    LoginResultSchema userLogin(User user);
     boolean userLogout(String token);
     boolean findTokenbyUUID(String uuid);
     void userDelete(String uuid);

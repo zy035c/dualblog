@@ -52,16 +52,11 @@ public class UserController {
         System.out.println("UserController.userLogin() user = " + user);
 
         // print blog's field
-        // System.out.println("UserController.userLogin() user.getId() = " +
-        // user.getId());
-        System.out.println("UserController.userLogin() user.getUsername() = " + user.getUsername());
         System.out.println("UserController.userLogin() user.getEmail() = " + user.getEmail());
         System.out.println("UserController.userLogin() user.getPassword() = " + user.getPassword());
-        System.out.println("UserController.userLogin() user.getPhone() = " + user.getPhone());
 
         try {
-            String token = UserService.userLogin(user);
-            var schema = new LoginResultSchema(token);
+            var schema = UserService.userLogin(user);
             return Result.success(schema);
         } catch (CustomException e) {
             String msg = e.getErrorMessage();

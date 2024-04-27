@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
 import com.ex.dualblog.mapper.UserMapper;
 import com.ex.dualblog.model.User;
+import com.ex.dualblog.schema.LoginResultSchema;
 import com.ex.dualblog.utils.*;
 
 import java.util.UUID;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String userLogin(User user) {
+    public LoginResultSchema userLogin(User user) {
         // 1. 进行一些非空判断
         if (user.getEmail() == null || "".equals(user.getEmail())) {
             throw new CustomException("邮箱不能为空");
@@ -68,9 +69,10 @@ public class UserServiceImpl implements UserService {
 
         redisTemplate.opsForValue().set(u.getId(), token, 2, TimeUnit.HOURS); // 把token加入白名单
         System.out.println("[userLogin] Token: " + token);
-        // u.setToken(token);
-        // System.out.println((String) redisTemplate.opsForValue().get(u.getId()));
-        return token;
+        
+        var schema = new LoginResultSchema(token, u.getId());
+
+        return schema;
     }
 
     @Override
