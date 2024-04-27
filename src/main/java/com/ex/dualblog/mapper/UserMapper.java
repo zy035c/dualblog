@@ -13,4 +13,5 @@ public interface UserMapper {
     User findUserByEmailAndPassword(User user);
     User findUserByID(String id);
     void deleteUserByID(String id);
+    User findUserByEmail(String email);
 }
