@@ -1,14 +1,24 @@
 package com.ex.dualblog.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Blog implements Serializable {
 
     private String id;
     private String title;
     private String authorUUID;
+    private Timestamp timestamp;
 
-    public Blog(String id, String title, String author) {
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Blog(String id, String title, String author, Timestamp timestamp) {
         this.id = id;
         this.title = title;
         this.authorUUID = author;
@@ -34,7 +44,8 @@ public class Blog implements Serializable {
         this.title = title;
     }
 
-    public Blog() {}
+    public Blog() {
+    }
 
     public String toString() {
         return "Blog{id=" + this.id + ", title=" + this.title;

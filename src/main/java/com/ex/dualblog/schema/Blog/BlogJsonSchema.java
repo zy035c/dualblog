@@ -11,6 +11,16 @@ public class BlogJsonSchema {
     private String authorUUID;
     private List<String> tags;
 
+    private String id;  /* optional */
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private Timestamp timestamp;
 
     public BlogJsonSchema(String content, String title, String author, List<String> tags) {

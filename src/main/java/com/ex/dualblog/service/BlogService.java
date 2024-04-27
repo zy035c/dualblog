@@ -8,7 +8,7 @@ import com.ex.dualblog.schema.Blog.CreateBlogResultSchema;
 
 
 public interface BlogService {
-    List<Blog> getAllBlogs();
-
+    public List<BlogJsonSchema> getAllBlogs();
+    List<Blog> generateTimeline(String token);
     CreateBlogResultSchema insertBlog(BlogJsonSchema blog);
 }
