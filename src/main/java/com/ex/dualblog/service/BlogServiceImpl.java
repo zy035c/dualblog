@@ -5,16 +5,14 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ex.dualblog.mapper.BlogMapper;
 import com.ex.dualblog.model.Blog;
 import com.ex.dualblog.model.ESBlog;
 import com.ex.dualblog.repository.ESBlogRepository;
-import com.ex.dualblog.schema.BlogJsonSchema;
-import com.ex.dualblog.schema.Result;
-
+import com.ex.dualblog.schema.Blog.BlogJsonSchema;
+import com.ex.dualblog.schema.Blog.CreateBlogResultSchema;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -34,12 +32,18 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Result<Void> insertBlog(BlogJsonSchema blogJson) {
-        
+    public CreateBlogResultSchema insertBlog(BlogJsonSchema blogJson) {
+
         // 1. Generate UUID
         String uuid = UUID.randomUUID().toString();
 
-        // Check 
+        // Check
+        var res = new CreateBlogResultSchema();
+        if (blogJson.getAuthorUUID() == null || blogJson.getAuthor() == "" || blogJson.getAuthor() == null) {
+            res.setMsg("博客保存失败，缺少作者信息。");
+            res.setOk(false);
+            return res;
+        }
 
         // 2. Insert into db
         try {
@@ -47,24 +51,28 @@ public class BlogServiceImpl implements BlogService {
             blogMapper.addBlog(blogModel);
         } catch (Exception e) {
             System.out.println("Error during inserting into MySql\n" + e.getMessage());
-            return new Result();
+            res.setMsg("博客保存失败，数据库异常。请联系管理员。");
+            res.setOk(false);
+            return res;
         }
 
         // 3. Insert into Elastic Search
         try {
-        ESBlog esBlog = new ESBlog(
-            blogJson.getContent(), 
-            blogJson.getTitle(), 
-            blogJson.getAuthor(), 
-            uuid, 
-            blogJson.getTags()
-        );
-        esBlogRepository.save(esBlog);
+            ESBlog esBlog = new ESBlog(
+                    blogJson.getContent(),
+                    blogJson.getTitle(),
+                    blogJson.getAuthor(),
+                    uuid,
+                    blogJson.getTags());
+            esBlogRepository.save(esBlog);
         } catch (Exception e) {
             System.out.println("Error during inserting into Elastic Search\n" + e.getMessage());
-            return false;
+            res.setMsg("博客保存失败，数据库异常。请联系管理员。");
+            res.setOk(false);
+            return res;
         }
 
-        return true;
+        res.setOk(true);
+        return res;
     }
 }

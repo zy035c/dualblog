@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ex.dualblog.model.Car;
 import com.ex.dualblog.model.User;
-import com.ex.dualblog.schema.LoginSchema;
+import com.ex.dualblog.schema.LoginResultSchema;
 import com.ex.dualblog.schema.Result;
 import com.ex.dualblog.service.UserService;
 import com.ex.dualblog.utils.*;
@@ -50,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/login")
-    public Result<LoginSchema> userLogin(@RequestBody User user) {
+    public Result<LoginResultSchema> userLogin(@RequestBody User user) {
 
         System.out.println("UserController.userLogin() called");
         System.out.println("UserController.userLogin() user = " + user);
@@ -64,7 +63,7 @@ public class UserController {
         
         try {
             String token = UserService.userLogin(user);
-            var schema = new LoginSchema(token);
+            var schema = new LoginResultSchema(token);
             return Result.success(schema);
         } catch (CustomException e) {
             String msg = e.getErrorMessage();
@@ -103,14 +102,5 @@ public class UserController {
     public Result<Void> userDelete(@RequestHeader("token") String token){
         UserService.userDelete(token);
         return Result.success();
-    }
-
-    @PostMapping(value = "/test")
-    public Result<Void> ESAddUser(@RequestBody Car user){
-        if (UserService.ESAddCar(user)) {
-            return Result.success();
-        } else{
-            return Result.error("1", "test");
-        }
     }
 }

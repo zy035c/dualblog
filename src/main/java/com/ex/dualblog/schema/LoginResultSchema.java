@@ -2,10 +2,10 @@ package com.ex.dualblog.schema;
 
 import java.io.Serializable;
 
-public class LoginSchema implements Serializable {
+public class LoginResultSchema implements Serializable {
     public String token;
 
-    public LoginSchema(String t) {
+    public LoginResultSchema(String t) {
         token = t;
     }
 

@@ -1,4 +1,4 @@
-package com.ex.dualblog.schema;
+package com.ex.dualblog.schema.Blog;
 
 import java.util.List;
 

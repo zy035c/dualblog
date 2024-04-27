@@ -6,14 +6,14 @@ public class ESBlog {
     private String content;
     private String title;
     private String author;
-    private String uuid;
+    private String id;
     private List<String> tags;
 
     public ESBlog(String content, String title, String author, String uuid, List<String> tags) {
         this.content = content;
         this.title = title;
         this.author = author;
-        this.uuid = uuid;
+        this.id = uuid;
         this.tags = tags;
     }
 
@@ -44,12 +44,12 @@ public class ESBlog {
         this.author = author;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String uuid) {
+        this.id = uuid;
     }
 
     public List<String> getTags() {

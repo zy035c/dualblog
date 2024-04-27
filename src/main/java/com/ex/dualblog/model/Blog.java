@@ -37,6 +37,6 @@ public class Blog implements Serializable {
     public Blog() {}
 
     public String toString() {
-        return "Blog{id=" + this.id + ", title=" + this.title + ", blogContent=" + this.content + "}";
+        return "Blog{id=" + this.id + ", title=" + this.title;
     }
 }

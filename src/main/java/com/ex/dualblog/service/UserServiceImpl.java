@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.ex.dualblog.mapper.UserMapper;
-import com.ex.dualblog.model.Car;
 import com.ex.dualblog.model.User;
 import com.ex.dualblog.utils.*;
 
@@ -23,22 +22,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
-    private ESCarRepository carRepository;
-
     @Override
     public List<User> getAllUsers() {
         return UserMapper.getAllUsers();
-    }
-
-    @Override
-    public boolean ESAddCar(Car car){
-        try {
-            carRepository.save(car);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     @Override
