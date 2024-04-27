@@ -101,7 +101,7 @@ public class UserController {
      * @return
      *         Get user's info (not password) by token
      */
-    @GetMapping(value = "/")
+    @GetMapping(value = "")
     public Result<User> userGetInfo(@RequestHeader("token") String token) {
 
         Result<User> res = Result.success();
