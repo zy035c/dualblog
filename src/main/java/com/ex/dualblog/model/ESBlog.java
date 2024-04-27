@@ -2,6 +2,9 @@ package com.ex.dualblog.model;
 
 import java.util.List;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
+@Document(indexName = "esblog")
 public class ESBlog {
     private String content;
     private String title;

@@ -3,5 +3,6 @@
 <mapper namespace="com.ex.dualblog.mapper.BlogMapper">
     <select id="getAllBlogs" resultType="com.ex.dualblog.model.Blog"> SELECT * FROM Blog; </select>
 
-    <insert id="addBlog" parameterType="com.ex.dualblog.model.Blog"> INSERT INTO User (id, title, authorUUID, timestamp) VALUES (#{id}, #{title},#{authorUUID},#{timestamp}); </insert>
+    <insert id="addBlog" parameterType="com.ex.dualblog.model.Blog"> INSERT INTO Blog (id, title,
+        authorUUID, timestamp) VALUES (#{id}, #{title},#{authorUUID},#{timestamp}); </insert>
 </mapper>
