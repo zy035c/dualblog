@@ -86,13 +86,14 @@ public class BlogServiceImpl implements BlogService {
             return res;
         }
 
-        // 2. Insert into db
+        // 2. Insert into MySQL
         try {
             var blogModel = new Blog(
-                    uuid,
-                    blogJson.getTitle(),
-                    blogJson.getAuthorUUID(),
-                    blogJson.getTimestamp());
+                uuid,
+                blogJson.getTitle(),
+                blogJson.getAuthorUUID(),
+                blogJson.getTimestamp()
+            );
             blogMapper.addBlog(blogModel);
         } catch (Exception e) {
             System.out.println("Error during inserting into MySql\n" + e.getMessage());
