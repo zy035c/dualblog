@@ -53,7 +53,7 @@ public class BlogServiceImpl implements BlogService {
                 System.out.println("Blog ID: " + blog.getId() + " Title: " + blog.getTitle() + " will be skipped.");
             }
         }
-        System.out.println("Successfully get" + resultList.size() + "blogs.");
+        System.out.println("Successfully get " + resultList.size() + " blogs.");
         return resultList;
     }
 

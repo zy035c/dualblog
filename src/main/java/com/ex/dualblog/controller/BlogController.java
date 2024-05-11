@@ -41,14 +41,14 @@ public class BlogController {
     }
 
     @GetMapping(value = "/timeline", consumes = "application/json", produces = "application/json")
-    public List<BlogJsonSchema> getTimeline(@RequestHeader("token") String token) {
-        return blogService.generateTimeline(token);
+    public Result<List<BlogJsonSchema>> getTimeline(@RequestHeader("token") String token) {
+        return Result.success(blogService.generateTimeline(token));
     }
 
     @GetMapping(value = "/search", consumes = "application/json", produces = "application/json")
-    public List<BlogJsonSchema> search(@RequestParam String keyword) {
+    public Result<List<BlogJsonSchema>> search(@RequestParam String keyword) {
         System.out.println("[BlogPostController::search] keyword = " + keyword);
-        return blogService.search(keyword);
+        return Result.success(blogService.search(keyword));
     }
 
 }
