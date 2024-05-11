@@ -177,7 +177,7 @@ public class BlogServiceImpl implements BlogService {
             result.add(blogJson);
         });
 
-        System.out.println("[BlogServiceImpl::search] Successfully searched " + result.size() + " blogs");
+        System.out.println("[BlogServiceImpl::search] Successfully collected " + result.size() + " hits.");
         return result;
     }
 
