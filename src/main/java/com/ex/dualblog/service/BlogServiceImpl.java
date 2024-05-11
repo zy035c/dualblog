@@ -1,11 +1,19 @@
 package com.ex.dualblog.service;
 
 import java.util.ArrayList;
-// import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.client.elc.NativeQuery;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.query.SearchTemplateQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +33,10 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private ESBlogRepository esBlogRepository;
+
+    @Autowired
+    private ElasticsearchOperations elasticsearchOperations;
+
 
     @Override
     public List<BlogJsonSchema> getAllBlogs() {
@@ -63,7 +75,7 @@ public class BlogServiceImpl implements BlogService {
 
         ESBlog esBlog = option.get();
 
-        // set firld from es blog
+        // set field from es blog
         blogJson.setContent(esBlog.getContent());
         blogJson.setAuthor(esBlog.getAuthor());
         blogJson.setTags(esBlog.getTags());
@@ -72,7 +84,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    @Transactional
+    // @Transactional
     public CreateBlogResultSchema insertBlog(BlogJsonSchema blogJson) {
 
         // 1. Generate UUID
@@ -123,8 +135,50 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<Blog> generateTimeline(String token) {
+    public List<BlogJsonSchema> generateTimeline(String token) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'generateTimeline'");
     }
+
+    @Override
+    public List<BlogJsonSchema> search(String keyword) {
+        List<BlogJsonSchema> result = new ArrayList<>();
+
+        List<String> matchFields = new ArrayList<>(
+            List.of("content", "author", "title")
+        );
+
+        Query query = NativeQuery.builder().withQuery(
+            q -> q.multiMatch(m -> m.fields(matchFields).query(keyword))
+        ).build();
+
+        var hits = elasticsearchOperations.search(
+            query, 
+            ESBlog.class
+        );
+
+        hits.forEach(hit -> {
+            ESBlog blog = hit.getContent();
+
+            var blogJson = new BlogJsonSchema(
+                blog.getContent(), 
+                blog.getTitle(), 
+                blog.getAuthor(), 
+                null
+            );
+            String uuid = blog.getId();
+
+            Blog mysqlBlog = blogMapper.getBlog(uuid);
+
+            blogJson.setId(uuid);
+            blogJson.setTimestamp(mysqlBlog.getTimestamp());
+            blogJson.setAuthorUUID(mysqlBlog.getAuthorUUID());
+
+            result.add(blogJson);
+        });
+
+        System.out.println("[BlogServiceImpl::search] Successfully searched " + result.size() + " blogs");
+        return result;
+    }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ex.dualblog.model.Blog;
@@ -40,8 +41,14 @@ public class BlogController {
     }
 
     @GetMapping(value = "/timeline", consumes = "application/json", produces = "application/json")
-    public List<Blog> getTimeline(@RequestHeader("token") String token) {
+    public List<BlogJsonSchema> getTimeline(@RequestHeader("token") String token) {
         return blogService.generateTimeline(token);
+    }
+
+    @GetMapping(value = "/search", consumes = "application/json", produces = "application/json")
+    public List<BlogJsonSchema> search(@RequestParam String keyword) {
+        System.out.println("[BlogPostController::search] keyword = " + keyword);
+        return blogService.search(keyword);
     }
 
 }

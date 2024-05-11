@@ -11,4 +11,6 @@ public interface BlogMapper {
     List<Blog> getAllBlogs();
 
     void addBlog(Blog blog);
+
+    Blog getBlog(String id);
 }

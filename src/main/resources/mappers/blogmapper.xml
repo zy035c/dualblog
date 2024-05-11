@@ -5,4 +5,7 @@
 
     <insert id="addBlog" parameterType="com.ex.dualblog.model.Blog"> INSERT INTO Blog (id, title,
         authorUUID, timestamp) VALUES (#{id}, #{title},#{authorUUID},#{timestamp}); </insert>
+
+    <select id="getBlog" resultType="com.ex.dualblog.model.Blog"> SELECT * FROM Blog WHERE id =
+        #{id} </select>
 </mapper>
