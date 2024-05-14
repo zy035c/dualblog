@@ -25,8 +25,8 @@ public class BlogController {
     private BlogService blogService;
 
     @GetMapping(value = "/all", consumes = "application/json", produces = "application/json")
-    public List<BlogJsonSchema> getAllBlogs() {
-        return blogService.getAllBlogs();
+    public Result<List<BlogJsonSchema>> getAllBlogs() {
+        return Result.success(blogService.getAllBlogs());
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
